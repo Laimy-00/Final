@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Your Orders</h1>
+    {% if orders %}
+        <ul>
+            {% for order in orders %}
+                <li>
+                    <h3>Order ID: {{ order.id }}</h3>
+                    <p>Customer ID: {{ order.customer_id }}</p>
+                    <p>Total Amount: {{ order.total_amount }}</p>
+                    <p>Date: {{ order.date }}</p>
+                    <h4>Dishes:</h4>
+                    <ul>
+                        {% for dish in order.dishes.all %}
+                            <li>{{ dish.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't placed any orders yet.</p>
+    {% endif %}
+{% endblock %}

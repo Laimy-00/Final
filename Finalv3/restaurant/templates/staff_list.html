@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <ul>
+        {% for user in staff_list %}
+            <li>
+                Person name: {{ user.f_name }}
+                Person surname: {{ user.l_name }}
+                Person position: {{ user.position }}
+                Person email: {{ user.email }}
+                Person phone number: {{ user.phone }}
+                <a class="btn btn-primary" href="{% url 'admin:main_app_customuser_change' user.id %}">Change person data</a>
+            </li>
+        {% empty %}
+            <li>You don't have crew members.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+staff_list

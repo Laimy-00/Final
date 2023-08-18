@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="content-section">
+    <h2 class="account-heading">{{ user.username }}</h2>
+    <p class="text-secondary">{{ user.f_name }} {{ user.l_name }}</p>
+    <p class="text-secondary">{{ user.email }}</p>
+    <p class="text-secondary">{{ user.phone }}</p>
+    <p class="text-secondary">{{ user.card_number }}</p>
+    <a class="btn btn-primary" href="{% url 'edit_profile' %}"><span>Edit personal info</span></a>
+    <a class="btn btn-primary" href="{% url 'create_reservation' %}"><span>Create reservation</span></a>
+    <a class="btn btn-primary" href="{% url 'cancelled_reservation' %}"><span>Cancelled reservations</span></a>
+    <a class="btn btn-primary" href="{% url 'finished_reservations' %}"><span>Finished reservations</span></a>
+    <a class="btn btn-primary" href="{% url 'orders' %}"><span>Orders</span></a>
+
+    <h1>Your Reservations</h1>
+
+    <ul>
+        {% for reservation in reservations %}
+            <li>
+                Reservation ID: {{ reservation.id }}
+                Table: {{ reservation.table.number }} ({{ reservation.table.capacity }} seats)
+                Booking Time: {{ reservation.booking_time }}
+                Status: {{ reservation.get_status_display }}
+                Additional Info: {{ reservation.additional_info }}
+                <a class="btn btn-primary" href="{% url 'edit_reservation' reservation.id %}">Edit Reservation</a>
+            </li>
+        {% empty %}
+            <li>You don't have any reservations.</li>
+        {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

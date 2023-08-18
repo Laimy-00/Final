@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Create Reservation</h1>
+    <h2>"Booking must be made for tomorrow or later."</h2>
+    <h2>"Booking time must be between 15:00 and 20:00."</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="booking_time">Booking Time:</label>
+        <input type="datetime-local" id="booking_time" name="booking_time" required><br>
+        <button type="submit">Create Reservation</button>
+    </form>
+{% endblock %}

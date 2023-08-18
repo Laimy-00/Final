@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="content-section">
+    <h2 class="account-heading">{{ user.username }}</h2>
+    <p class="text-secondary">{{ user.f_name }} {{ user.l_name }}</p>
+    <p class="text-secondary">{{ user.email }}</p>
+    <p class="text-secondary">{{ user.phone }}</p>
+    <a class="btn btn-primary" href="{% url 'edit_profile' %}"><span>Edit personal info</span></a>
+    {% if position.name == 'Manager' or position.name == 'Chief' %}
+      <a class="btn btn-primary" href="{% url 'admin:index' %}"><span>Go to admin page</span></a>
+      <a class="btn btn-primary" href="{% url 'reservations' %}"><span>Active Reservations</span></a>
+      <a class="btn btn-primary" href="{% url 'unactive_reservations' %}"><span>Finished/canceled Reservations</span></a>
+      <a class="btn btn-primary" href="{% url 'staff_list' %}"><span>Crew</span></a>
+      <a class="btn btn-primary" href="{% url 'create_news' %}"><span>Create news</span></a>
+    {% endif %}
+    <p>This is staff page!</p>
+    {% if position %}
+      <h2>Position: {{ position.name }}</h2>
+    {% else %}
+      <p>No position</p>
+    {% endif %}
+    {% if schedule %}
+      <h2>Schedule</h2>
+      <h2>Starting day: {{ schedule.starting_day }}</h2>
+      <h2>Starting time: {{ schedule.starting_time }}</h2>
+      <h2>Ending time: {{ schedule.ending_time }}</h2>
+      {% if schedule.remarks %}
+        <h2>Remarks: {{ schedule.remarks }}</h2>
+      {% endif %}
+    {% else %}
+      <p>No schedule</p>
+    {% endif %}
+  </div>
+{% endblock %}

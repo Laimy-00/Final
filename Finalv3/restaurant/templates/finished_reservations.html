@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Your finished reservations</h1>
+  <a href="{% url 'account' %}"><span>Back</span></a>
+  <ul>
+      {% for reservation in reservations %}
+          <li>
+              Reservation ID: {{ reservation.id }}
+              Table: {{ reservation.table.number }} ({{ reservation.table.capacity }} seats)
+              Booking Time: {{ reservation.booking_time }}
+              Status: {{ reservation.get_status_display }}
+              Additional Info: {{ reservation.additional_info }}
+          </li>
+      {% empty %}
+          <li>You don't have any finished reservations.</li>
+      {% endfor %}
+  </ul>
+{% endblock %}

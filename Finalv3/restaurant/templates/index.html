@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>News of our restaurant</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="news-feed" id="newsFeed">
+                    {% for article in news %}
+                        <div class="article">
+                            <h3>{{ article.title }}</h3>
+                            <p>{{ article.content }}</p>
+                            <p><strong>Date:</strong> {{ article.pub_date }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .news-feed {
+            display: block;
+        }
+        .article {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        #toggleButton {
+            margin-bottom: 20px;
+        }
+    </style>
+    {% load static %}
+    <script src="{% static 'js/index.js' %}"></script>
+{% endblock %}

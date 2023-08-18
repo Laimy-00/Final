@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <ul>
+        {% for reservation in reservations %}
+            <li>
+                Reservation ID: {{ reservation.id }}
+                Table: {{ reservation.table.number }} ({{ reservation.table.capacity }} seats)
+                Booking Time: {{ reservation.booking_time }}
+                Status: {{ reservation.get_status_display }}
+                Additional Info: {{ reservation.additional_info }}
+                <a class="btn btn-primary" href="{% url 'admin:main_app_reservation_change' reservation.id %}">Edit Reservation</a>
+            </li>
+        {% empty %}
+            <li>You don't have any reservations in pending or confirmed status.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>All gallery</h1>
+  <div class="grid" id="imageGrid"></div>
+  <script>
+      var styles = document.createElement("style");
+      styles.innerHTML = `
+          .grid {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              grid-gap: 10px;
+          }
+          .grid img {
+              width: 100%;
+              height: auto;
+          }
+      `;
+      document.head.appendChild(styles);
+
+      document.addEventListener("DOMContentLoaded", function() {
+          var imageGrid = document.getElementById("imageGrid");
+
+          function addImageWithDelay(index) {
+              if (index < 6) {
+                  var image = document.createElement("img");
+                  image.src = "https://picsum.photos/200/300?random=" + index;
+                  image.alt = "Image " + (index + 1);
+
+                  var imageContainer = document.createElement("div");
+                  imageContainer.appendChild(image);
+
+                  imageGrid.appendChild(imageContainer);
+
+                  setTimeout(function() {
+                      addImageWithDelay(index + 1);
+                  }, 100);
+              }
+          }
+
+          addImageWithDelay(0);
+      });
+  </script>
+{% endblock %}

@@ -1,0 +1,9 @@
+
+{% block content %}
+  <h1>All ingredients</h1>
+  <ul>
+    {% for ing in ingredients %}
+      <li>{{ ing.name }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
